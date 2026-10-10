@@ -5,21 +5,25 @@ import ctypes as ct
 program = r"""
 BPF_PROG_ARRAY(syscall, 500);
 
-int hello(struct bpf_raw_tracepoint_args *ctx) {
-    int opcode = ctx->args[1];
+RAW_TRACEPOINT_PROBE(sys_enter)
+{
+    int opcode = ctx -> args[1];
     syscall.call(ctx, opcode);
     bpf_trace_printk("Another syscall: %d", opcode);
     return 0;
 }
 
-int hello_exec(void *ctx) {
+int hello_exec(void* ctx) 
+{
     bpf_trace_printk("Executing a program");
     return 0;
 }
 
-int hello_timer(struct bpf_raw_tracepoint_args *ctx) {
-    int opcode = ctx->args[1];
-    switch (opcode) {
+int hello_timer(struct bpf_raw_tracepoint_args* ctx) 
+{
+    int opcode = ctx -> args[1];
+    switch (opcode) 
+    {
         case 222:
             bpf_trace_printk("Creating a timer");
             break;
@@ -33,12 +37,13 @@ int hello_timer(struct bpf_raw_tracepoint_args *ctx) {
     return 0;
 }
 
-int ignore_opcode(void *ctx) {
+int ignore_opcode(void* ctx) 
+{
     return 0;
 }
 """
 
-b = BPF(text=program)
+b = BPF(text = program)
 
 ignore_fn = b.load_func("ignore_opcode", BPF.RAW_TRACEPOINT)
 exec_fn = b.load_func("hello_exec", BPF.RAW_TRACEPOINT)
@@ -57,6 +62,5 @@ prog_array[ct.c_int(223)] = ct.c_int(timer_fn.fd)
 prog_array[ct.c_int(224)] = ct.c_int(timer_fn.fd)
 prog_array[ct.c_int(225)] = ct.c_int(timer_fn.fd)
 prog_array[ct.c_int(226)] = ct.c_int(timer_fn.fd)
-b.attach_raw_tracepoint(tp="sys_enter", fn_name="hello")
 
 b.trace_print()

@@ -28,7 +28,7 @@ TRACEPOINT_PROBE(syscalls, sys_enter_openat)
 
 b = BPF(text=program)
 
-def print_event(cpu, data, size):  
+def print_event(data):
    ev = b["output"].event(data)
    print(f"{ev.command.decode('utf-8')} - {ev.filename.decode('utf-8', 'replace')}")
  
