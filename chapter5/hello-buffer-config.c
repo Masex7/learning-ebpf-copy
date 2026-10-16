@@ -17,7 +17,10 @@ void handle_event(void *ctx, int cpu, void *data, unsigned int data_sz)
 {
 	struct data_t *m = data;
 
-	printf("%-6d %-6d %-16s %-16s %s\n", m->pid, m->uid, m->command, m->path, m->message);
+	if (m->uid == 1000)
+		printf("%-6d %-6d %-16s %-16s %s\n", m->pid, 1000, m->command, m->path, "Hello 1000!");
+	if (m->uid == 0)
+		printf("%-6d %-6d %-16s %-16s %s\n", m->pid, 0, m->command, m->path, "Hello 0!");
 }
 
 void lost_event(void *ctx, int cpu, long long unsigned int data_sz)

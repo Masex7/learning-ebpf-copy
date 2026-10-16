@@ -1,0 +1,10 @@
+. debug-fedora31/vmlinux.h
+. /usr/include/bpf/bpf_helpers.h
+.. /usr/include/bpf/bpf_helper_defs.h
+. /usr/include/bpf/bpf_tracing.h
+. /usr/include/bpf/bpf_core_read.h
+. debug-fedora31/hello-buffer-config.h
+debug-fedora31/program.bpf.c:45:40: error: use of undeclared identifier 'BPF_F_CURRENT_CPU'
+   45 |    bpf_perf_event_output(ctx, &output, BPF_F_CURRENT_CPU, &data, sizeof(data));   
+      |                                        ^~~~~~~~~~~~~~~~~
+1 error generated.

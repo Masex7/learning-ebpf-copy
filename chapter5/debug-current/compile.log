@@ -1,0 +1,35 @@
+. debug-current/vmlinux.h
+In file included from debug-current/program.bpf.c:1:
+debug-current/vmlinux.h:35118:3: warning: declaration does not declare anything [-Wmissing-declarations]
+ 35118 |                 struct slock_owned;
+       |                 ^~~~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:42051:2: warning: declaration does not declare anything [-Wmissing-declarations]
+ 42051 |         struct aes_enckey;
+       |         ^~~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:62890:3: warning: declaration does not declare anything [-Wmissing-declarations]
+ 62890 |                 struct ns_tree;
+       |                 ^~~~~~~~~~~~~~
+debug-current/vmlinux.h:85665:2: warning: declaration does not declare anything [-Wmissing-declarations]
+ 85665 |         struct __filename_head;
+       |         ^~~~~~~~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:87328:2: warning: declaration does not declare anything [-Wmissing-declarations]
+ 87328 |         struct __fs_path;
+       |         ^~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:123908:3: warning: declaration does not declare anything [-Wmissing-declarations]
+ 123908 |                 struct pidfs_anon_attr;
+        |                 ^~~~~~~~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:124164:2: warning: declaration does not declare anything [-Wmissing-declarations]
+ 124164 |         union pipe_index;
+        |         ^~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:138051:4: warning: declaration does not declare anything [-Wmissing-declarations]
+ 138051 |                         struct freelist_counters;
+        |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+debug-current/vmlinux.h:138635:2: warning: declaration does not declare anything [-Wmissing-declarations]
+ 138635 |         struct socket_alloc;
+        |         ^~~~~~~~~~~~~~~~~~~
+. /usr/include/bpf/bpf_helpers.h
+.. /usr/include/bpf/bpf_helper_defs.h
+. /usr/include/bpf/bpf_tracing.h
+. /usr/include/bpf/bpf_core_read.h
+. debug-current/hello-buffer-config.h
+9 warnings generated.

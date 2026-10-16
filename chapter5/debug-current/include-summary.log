@@ -1,0 +1,14 @@
+. debug-current/vmlinux.h
+debug-current/vmlinux.h:35118:3: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:42051:2: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:62890:3: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:85665:2: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:87328:2: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:123908:3: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:124164:2: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:138051:4: warning: declaration does not declare anything [-Wmissing-declarations]
+debug-current/vmlinux.h:138635:2: warning: declaration does not declare anything [-Wmissing-declarations]
+. /usr/include/bpf/bpf_helpers.h
+. /usr/include/bpf/bpf_tracing.h
+. /usr/include/bpf/bpf_core_read.h
+. debug-current/hello-buffer-config.h

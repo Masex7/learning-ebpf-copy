@@ -4,22 +4,27 @@ from bcc import BPF
 import ctypes as ct
 
 program = r"""
-struct user_msg_t {
+struct user_msg_t 
+{
    char message[13];
 };
+
+BPF_PROG_ARRAY(syscall, 500);
 
 BPF_HASH(config, u32, struct user_msg_t);
 
 BPF_PERF_OUTPUT(output); 
 
-struct data_t {     
+struct data_t 
+{     
    int pid;
    int uid;
    char command[16];
    char message[12];
 };
 
-int hello(void *ctx) {
+RAW_TRACEPOINT_PROBE(sys_enter)
+{
    struct data_t data = {}; 
    struct user_msg_t *p;
    char message[12] = "Hello World";
@@ -30,9 +35,12 @@ int hello(void *ctx) {
    bpf_get_current_comm(data.command, sizeof(data.command));
 
    p = config.lookup(&data.uid);
-   if (p != 0) {
+   if (p != 0) 
+   {
       bpf_probe_read_kernel(data.message, sizeof(data.message), p->message);       
-   } else {
+   } 
+   else 
+   {
       bpf_probe_read_kernel(data.message, sizeof(data.message), message); 
    }
 
@@ -43,15 +51,15 @@ int hello(void *ctx) {
 """
 
 b = BPF(text=program) 
-syscall = b.get_syscall_fnname("execve")
-b.attach_kprobe(event=syscall, fn_name="hello")
+# syscall = b.get_syscall_fnname("execve")
+# b.attach_kprobe(event=syscall, fn_name="hello")
 b["config"][ct.c_int(0)] = ct.create_string_buffer(b"Hey root!")
-b["config"][ct.c_int(501)] = ct.create_string_buffer(b"Hi user 501!")
+b["config"][ct.c_int(1000)] = ct.create_string_buffer(b"Hi user 1000!")
  
 def print_event(cpu, data, size):  
    data = b["output"].event(data)
    print(f"{data.pid} {data.uid} {data.command.decode()} {data.message.decode()}")
  
 b["output"].open_perf_buffer(print_event) 
-while True:   
+while True:
    b.perf_buffer_poll()
